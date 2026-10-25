@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="LifeSpace — a focused workspace for tasks, habits, goals, notes, and personal progress.">
+  <title>LifeSpace — Personal Productivity OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="LifeSpace home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">LifeSpace</span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Workspace">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span><span>Overview</span></button>
+        <button class="nav-item" data-view="tasks"><span class="nav-icon">☷</span><span>Tasks</span><span class="nav-count" id="nav-task-count">0</span></button>
+        <button class="nav-item" data-view="habits"><span class="nav-icon">◷</span><span>Habits</span></button>
+        <button class="nav-item" data-view="goals"><span class="nav-icon">◎</span><span>Goals</span></button>
+        <button class="nav-item" data-view="calendar"><span class="nav-icon">▦</span><span>Calendar</span></button>
+        <button class="nav-item" data-view="notes"><span class="nav-icon">▤</span><span>Notes</span></button>
+        <button class="nav-item" data-view="insights"><span class="nav-icon">↗</span><span>Insights</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="focus-card">
+          <div class="focus-orbit"><span>✳</span></div>
+          <p class="focus-title">Make room for what matters.</p>
+          <p class="focus-copy">Small, consistent steps add up.</p>
+        </div>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span><span>Settings</span></button>
+        <div class="profile-row">
+          <div class="avatar">Y</div>
+          <div class="profile-text"><strong>Your workspace</strong><span>Personal account</span></div>
+          <span class="profile-menu">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong id="current-section">Overview</strong></div>
+        <div class="topbar-actions">
+          <div class="live-clock"><span class="clock-dot"></span><span id="clock">--:--</span></div>
+          <button class="icon-button" id="theme-toggle" aria-label="Toggle appearance" title="Toggle appearance">◐</button>
+          <button class="top-avatar" aria-label="Personal workspace">Y</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="view active" id="view-overview">
+          <div class="page-heading">
+            <div><p class="eyebrow" id="date-label">YOUR SPACE · TODAY</p><h1 id="greeting">Good morning.</h1><p class="page-subtitle">A clear mind starts with a clear plan.</p></div>
+            <button class="primary-button" id="quick-add"><span>＋</span> Add a task</button>
+          </div>
+
+          <div class="hero-panel">
+            <div class="hero-copy"><div class="hero-kicker"><span class="status-dot"></span> YOUR DAILY OVERVIEW</div><h2>Make today<br><em>count.</em></h2><p>Progress is built one thoughtful action at a time. Choose what matters and begin there.</p><button class="text-button" data-go="tasks">Review your tasks <span>↗</span></button></div>
+            <div class="hero-visual" aria-hidden="true"><div class="visual-ring ring-one"></div><div class="visual-ring ring-two"></div><div class="visual-ring ring-three"></div><div class="visual-core"><span>LS</span></div><div class="visual-star star-a">✳</div><div class="visual-star star-b">✦</div><div class="visual-caption">FOCUS<br><strong>ON WHAT MATTERS</strong></div></div>
+            <div class="hero-footer"><span><span class="mini-dot"></span> Your pace. Your priorities.</span><span id="hero-date">TODAY</span></div>
+          </div>
+
+          <div class="section-heading"><div><h2>Your day at a glance</h2><p>Keep the essentials in view.</p></div><button class="subtle-button" data-go="insights">View insights <span>→</span></button></div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span>Tasks completed</span><span class="metric-icon green">✓</span></div><div class="metric-value"><strong id="metric-completed">0</strong><span id="task-rate">0% of tasks</span></div><div class="mini-progress"><span id="task-progress"></span></div><div class="metric-foot"><span>Today's progress</span><span id="metric-task-total">0 total</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Active habits</span><span class="metric-icon amber">↗</span></div><div class="metric-value"><strong id="metric-habits">0</strong><span>tracked habits</span></div><div class="metric-foot spaced"><span>Today's check-ins</span><strong id="habit-checkins">0 / 0</strong></div><div class="habit-mini-dots" id="habit-mini-dots"></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Goals in progress</span><span class="metric-icon blue">◎</span></div><div class="metric-value"><strong id="metric-goals">0</strong><span>active goals</span></div><div class="metric-foot spaced"><span>Average progress</span><strong id="goal-average">0%</strong></div><div class="mini-progress blue-track"><span id="goal-progress"></span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel tasks-panel"><div class="panel-heading"><div><h2>Today's tasks</h2><p>The next right thing.</p></div><button class="panel-link" data-go="tasks">See all <span>→</span></button></div><div id="overview-task-list" class="task-list"></div><button class="add-inline" id="add-task-inline">＋ Add another task</button></article>
+            <article class="panel habits-panel"><div class="panel-heading"><div><h2>Daily habits</h2><p>Consistency over intensity.</p></div><button class="round-link" data-go="habits" aria-label="Open habits">↗</button></div><div id="overview-habit-list" class="habit-list"></div><div class="habit-summary"><div class="summary-ring" id="habit-ring"><span id="habit-ring-value">0%</span></div><div><strong id="habit-summary-title">Start your streak</strong><p id="habit-summary-copy">Check off a habit to build momentum.</p></div></div></article>
+            <article class="panel goals-panel"><div class="panel-heading"><div><h2>Goals in focus</h2><p>Keep your bigger picture close.</p></div><button class="panel-link" data-go="goals">All goals <span>→</span></button></div><div id="overview-goal-list" class="goal-list"></div></article>
+            <article class="panel notes-panel"><div class="panel-heading"><div><h2>Quick notes</h2><p>Keep a thought before it slips away.</p></div><button class="round-link" data-go="notes" aria-label="Open notes">↗</button></div><textarea id="quick-note" class="quick-note" placeholder="A thought, reminder, or idea…"></textarea><div class="note-footer"><span id="note-status">Saved on this device</span><button class="small-button" id="save-note">Save note</button></div></article>
+          </div>
+          <footer class="app-footer"><span>LifeSpace <span class="footer-separator">·</span> Personal Productivity OS</span><span>One step at a time.</span></footer>
+        </section>
+
+        <section class="view" id="view-tasks">
+          <div class="page-heading"><div><p class="eyebrow">MAKE IT HAPPEN</p><h1>Tasks</h1><p class="page-subtitle">Turn intentions into actions.</p></div><button class="primary-button" id="tasks-add"><span>＋</span> New task</button></div>
+          <div class="panel full-panel"><div class="toolbar"><div class="filter-tabs" id="task-filters"><button class="filter-tab active" data-filter="all">All tasks</button><button class="filter-tab" data-filter="open">To do</button><button class="filter-tab" data-filter="done">Completed</button></div><span class="muted small" id="tasks-count-label">0 tasks</span></div><div class="full-task-list" id="full-task-list"></div></div>
+        </section>
+
+        <section class="view" id="view-habits">
+          <div class="page-heading"><div><p class="eyebrow">BUILD YOUR RHYTHM</p><h1>Habits</h1><p class="page-subtitle">Make the small things count.</p></div><button class="primary-button" id="habit-add"><span>＋</span> Add habit</button></div>
+          <div class="metric-grid compact-metrics"><article class="metric-card"><div class="metric-top"><span>Today's check-ins</span><span class="metric-icon green">✓</span></div><div class="metric-value"><strong id="habit-page-checkins">0/0</strong></div><div class="mini-progress"><span id="habit-page-progress"></span></div></article><article class="metric-card"><div class="metric-top"><span>Habits to build</span><span class="metric-icon amber">◷</span></div><div class="metric-value"><strong id="habit-page-total">0</strong></div><div class="metric-foot"><span>Start with one repeatable action.</span></div></article></div>
+          <div class="habit-page-grid" id="full-habit-list"></div>
+        </section>
+
+        <section class="view" id="view-goals">
+          <div class="page-heading"><div><p class="eyebrow">THINK LONG TERM</p><h1>Goals</h1><p class="page-subtitle">Give your effort a direction.</p></div><button class="primary-button" id="goal-add"><span>＋</span> New goal</button></div>
+          <div class="goal-page-grid" id="full-goal-list"></div>
+        </section>
+
+        <section class="view" id="view-calendar">
+          <div class="page-heading"><div><p class="eyebrow">SEE THE BIGGER PICTURE</p><h1>Calendar</h1><p class="page-subtitle">A simple view of your schedule.</p></div><div class="calendar-nav"><button class="icon-button" id="month-prev" aria-label="Previous month">‹</button><button class="icon-button" id="month-next" aria-label="Next month">›</button></div></div>
+          <div class="panel calendar-panel"><div class="calendar-title" id="calendar-title"></div><div class="calendar-grid" id="calendar-grid"></div><div class="calendar-legend"><span><i class="legend-dot"></i> Today</span><span><i class="legend-dot task-legend"></i> Has tasks</span></div></div>
+        </section>
+
+        <section class="view" id="view-notes">
+          <div class="page-heading"><div><p class="eyebrow">CLEAR YOUR MIND</p><h1>Notes</h1><p class="page-subtitle">Capture ideas while they're fresh.</p></div><button class="primary-button" id="note-add"><span>＋</span> New note</button></div>
+          <div class="notes-grid" id="notes-grid"></div>
+        </section>
+
+        <section class="view" id="view-insights">
+          <div class="page-heading"><div><p class="eyebrow">NOTICE YOUR PROGRESS</p><h1>Insights</h1><p class="page-subtitle">A useful snapshot of your effort.</p></div></div>
+          <div class="metric-grid"><article class="metric-card"><div class="metric-top"><span>Tasks completed</span><span class="metric-icon green">✓</span></div><div class="metric-value"><strong id="insight-completed">0</strong></div><div class="metric-foot"><span>Across your workspace</span></div></article><article class="metric-card"><div class="metric-top"><span>Completion rate</span><span class="metric-icon blue">↗</span></div><div class="metric-value"><strong id="insight-rate">0%</strong></div><div class="mini-progress"><span id="insight-progress"></span></div></article><article class="metric-card"><div class="metric-top"><span>Habit consistency</span><span class="metric-icon amber">◷</span></div><div class="metric-value"><strong id="insight-habit-rate">0%</strong></div><div class="metric-foot"><span>Today's check-ins</span></div></article></div>
+          <div class="insights-layout"><article class="panel"><div class="panel-heading"><div><h2>Task overview</h2><p>Completed versus remaining.</p></div></div><div class="chart-wrap"><div class="donut-chart" id="task-donut"><div class="donut-inner"><strong id="donut-total">0</strong><span>tasks</span></div></div><div class="chart-legend"><span><i class="legend-dot"></i> Completed <strong id="legend-done">0</strong></span><span><i class="legend-dot pending-legend"></i> Remaining <strong id="legend-open">0</strong></span></div></div></article><article class="panel"><div class="panel-heading"><div><h2>Keep perspective</h2><p>Progress is more than a perfect day.</p></div></div><div class="insight-message"><div class="insight-symbol">✳</div><h3>Consistency is a practice.</h3><p>Use these numbers as feedback, not a verdict. Choose a realistic next step and return to it tomorrow.</p></div></article></div>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="page-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h1>Settings</h1><p class="page-subtitle">A few preferences for your workspace.</p></div></div>
+          <div class="panel settings-panel"><div class="setting-row"><div><strong>Appearance</strong><p>Switch between dark and light workspace themes.</p></div><button class="secondary-button" id="settings-theme">Toggle theme</button></div><div class="setting-row"><div><strong>Workspace data</strong><p>Your tasks, habits, goals, and notes are stored in this browser.</p></div><button class="secondary-button" id="export-data">Export data</button></div><div class="setting-row"><div><strong>Reset demo data</strong><p>Restore the original sample workspace on this device.</p></div><button class="danger-button" id="reset-data">Reset data</button></div><div class="setting-note"><span>ⓘ</span><p>This is a client-side demo. Data stays in this browser's local storage and is not synced to an account or server.</p></div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <dialog class="app-dialog" id="item-dialog"><form method="dialog" id="item-form"><div class="dialog-heading"><div><p class="eyebrow" id="dialog-eyebrow">QUICK ACTION</p><h2 id="dialog-title">Add task</h2></div><button class="icon-button dialog-close" value="cancel" aria-label="Close dialog">×</button></div><div id="dialog-fields"></div><div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button class="primary-button" id="dialog-submit" value="default">Save</button></div></form></dialog>
+</body>
+</html>
